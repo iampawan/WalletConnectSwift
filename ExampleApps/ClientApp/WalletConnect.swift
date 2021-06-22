@@ -22,23 +22,23 @@ class WalletConnect {
         self.delegate = delegate
     }
 
-    func connect() -> WCURL {
+    func connect() -> String {
         // gnosis wc bridge: https://safe-walletconnect.gnosis.io
         // test bridge with latest protocol version: https://bridge.walletconnect.org
         let wcUrl =  WCURL(topic: UUID().uuidString,
-                           bridgeURL: URL(string: "https://bridge.walletconnect.org")!,
+                           bridgeURL: URL(string: "https://safe-walletconnect.gnosis.io")!,
                            key: try! randomKey())
         let clientMeta = Session.ClientMeta(name: "Frontier",
                                             description: "WalletConnectSwift ",
                                             icons: [],
-                                            url: URL(string: "codepur.dev")!)
+                                            url: URL(string: "https://safe.gnosis.io")!)
         let dAppInfo = Session.DAppInfo(peerId: UUID().uuidString, peerMeta: clientMeta)
         client = Client(delegate: self, dAppInfo: dAppInfo)
 
         print("WalletConnect URL: \(wcUrl.absoluteString)")
 
         try! client.connect(to: wcUrl)
-        return wcUrl
+      return wcUrl.absoluteString
     }
 
     func reconnectIfNeeded() {

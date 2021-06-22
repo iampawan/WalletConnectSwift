@@ -12,16 +12,16 @@ class MainViewController: UIViewController {
     @IBAction func connect(_ sender: Any) {
       let link = "rainbow:"
       let connectionUrl = walletConnect.connect()
-      let uri = connectionUrl.fullyPercentEncodedStr
-              var delimiter: String
-              if link.contains("http") {
-                  delimiter = "/"
-              } else {
-                  delimiter = "//"
-              }
-              let urlStr = "\(link)\(delimiter)wc?uri=\(uri)"
-//        deepLinkUrl = connectionUrl.replacingOccurrences(of: "wc:", with: "wc://")
-      UIApplication.shared.open(URL(string: urlStr)!, options: [:], completionHandler: nil)
+      var delimiter: String
+         if link.contains("http") {
+           delimiter = "/"
+         } else {
+           delimiter = "//"
+         }
+      var deepLinkUrl = "\(link)\(delimiter)wc?uri=\(connectionUrl)"
+//        deepLinkUrl = deepLinkUrl.replacingOccurrences(of: "wc:", with: "wc://")
+      UIApplication.shared.open(URL(string: deepLinkUrl)!, options: [:], completionHandler: nil)
+      
 //        if let url = URL(string: deepLinkUrl), UIApplication.shared.canOpenURL(url) {
 //            UIApplication.shared.open(url, options: [:], completionHandler: nil)
 //        } else {
@@ -37,18 +37,21 @@ class MainViewController: UIViewController {
     }
 
     func onMainThread(_ closure: @escaping () -> Void) {
-        if Thread.isMainThread {
-            closure()
-        } else {
-            DispatchQueue.main.async {
-                closure()
-            }
-        }
+//        if Thread.isMainThread {
+//            closure()
+//        } else {
+//            DispatchQueue.main.async {
+//                closure()
+//            }
+//        }
     }
 }
 
 extension MainViewController: WalletConnectDelegate {
     func failedToConnect() {
+//      if(walletConnect.session != nil){
+//        try! walletConnect.client.disconnect(from: walletConnect.session)
+//      }
         onMainThread { [unowned self] in
             if let handshakeController = self.handshakeController {
                 handshakeController.dismiss(animated: true)
@@ -58,6 +61,9 @@ extension MainViewController: WalletConnectDelegate {
     }
 
     func didConnect() {
+//      if(walletConnect.session != nil){
+//        try! walletConnect.client.disconnect(from: walletConnect.session)
+//      }
         onMainThread { [unowned self] in
             self.actionsController = ActionsViewController.create(walletConnect: self.walletConnect)
             if let handshakeController = self.handshakeController {
@@ -71,6 +77,9 @@ extension MainViewController: WalletConnectDelegate {
     }
 
     func didDisconnect() {
+//      if(walletConnect.session != nil){
+//        try! walletConnect.client.disconnect(from: walletConnect.session)
+//      }
         onMainThread { [unowned self] in
             if let presented = self.presentedViewController {
                 presented.dismiss(animated: false)
