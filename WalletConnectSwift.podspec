@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   spec.cocoapods_version = '>= 1.4.1'
   spec.platform     = :ios, "11.0"
   spec.swift_version = "5.0"
-  spec.source       = { :git => "https://github.com/WalletConnect/WalletConnectSwift.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/iampawan/WalletConnectSwift.git", :tag => "#{spec.version}" }
   spec.source_files  = "Sources/**/*.swift"
   spec.requires_arc = true
   spec.dependency "CryptoSwift", "~> 1.4"
