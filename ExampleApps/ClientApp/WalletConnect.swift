@@ -22,23 +22,23 @@ class WalletConnect {
         self.delegate = delegate
     }
 
-    func connect() -> String {
+    func connect() -> WCURL {
         // gnosis wc bridge: https://safe-walletconnect.gnosis.io
         // test bridge with latest protocol version: https://bridge.walletconnect.org
         let wcUrl =  WCURL(topic: UUID().uuidString,
                            bridgeURL: URL(string: "https://bridge.walletconnect.org")!,
                            key: try! randomKey())
-        let clientMeta = Session.ClientMeta(name: "ExampleDApp",
+        let clientMeta = Session.ClientMeta(name: "Frontier",
                                             description: "WalletConnectSwift ",
                                             icons: [],
-                                            url: URL(string: "https://safe.gnosis.io")!)
+                                            url: URL(string: "codepur.dev")!)
         let dAppInfo = Session.DAppInfo(peerId: UUID().uuidString, peerMeta: clientMeta)
         client = Client(delegate: self, dAppInfo: dAppInfo)
 
         print("WalletConnect URL: \(wcUrl.absoluteString)")
 
         try! client.connect(to: wcUrl)
-        return wcUrl.absoluteString
+        return wcUrl
     }
 
     func reconnectIfNeeded() {
@@ -80,5 +80,17 @@ extension WalletConnect: ClientDelegate {
     func client(_ client: Client, didDisconnect session: Session) {
         UserDefaults.standard.removeObject(forKey: sessionKey)
         delegate.didDisconnect()
+    }
+}
+
+extension WCURL {
+    var partiallyPercentEncodedStr: String {
+        let params = "bridge=\(bridgeURL.absoluteString)&key=\(key)"
+            .addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? ""
+        return "wc:\(topic)@\(version)?\(params))"
+    }
+
+    var fullyPercentEncodedStr: String {
+        absoluteString.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? ""
     }
 }

@@ -19,7 +19,7 @@ public struct Session: Codable {
 
     public struct DAppInfo: Codable, Equatable {
         public let peerId: String
-        public let peerMeta: ClientMeta
+        public let peerMeta: ClientMeta?
         public let chainId: Int?
         public let approved: Bool?
 
@@ -61,7 +61,7 @@ public struct Session: Codable {
         public let peerId: String
         public let peerMeta: ClientMeta
 
-        public init(approved: Bool, accounts: [String], chainId: Int, peerId: String, peerMeta: ClientMeta) {
+        public init(approved: Bool, accounts: [String], chainId: Int, peerId: String, peerMeta: ClientMeta?) {
             self.approved = approved
             self.accounts = accounts
             self.chainId = chainId

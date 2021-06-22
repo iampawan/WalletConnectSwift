@@ -10,14 +10,24 @@ class MainViewController: UIViewController {
     var walletConnect: WalletConnect!
 
     @IBAction func connect(_ sender: Any) {
-        let connectionUrl = walletConnect.connect()
-        let deepLinkUrl = connectionUrl.replacingOccurrences(of: "wc:", with: "wc://")
-        if let url = URL(string: deepLinkUrl), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        } else {
-            handshakeController = HandshakeViewController.create(code: connectionUrl)
-            present(handshakeController, animated: true)
-        }
+      let link = "rainbow:"
+      let connectionUrl = walletConnect.connect()
+      let uri = connectionUrl.fullyPercentEncodedStr
+              var delimiter: String
+              if link.contains("http") {
+                  delimiter = "/"
+              } else {
+                  delimiter = "//"
+              }
+              let urlStr = "\(link)\(delimiter)wc?uri=\(uri)"
+//        deepLinkUrl = connectionUrl.replacingOccurrences(of: "wc:", with: "wc://")
+      UIApplication.shared.open(URL(string: urlStr)!, options: [:], completionHandler: nil)
+//        if let url = URL(string: deepLinkUrl), UIApplication.shared.canOpenURL(url) {
+//            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//        } else {
+//            handshakeController = HandshakeViewController.create(code: connectionUrl)
+//            present(handshakeController, animated: true)
+//        }
     }
 
     override func viewDidLoad() {
@@ -86,3 +96,5 @@ extension UIAlertController {
         controller.present(alert.withCloseButton(), animated: true)
     }
 }
+
+
