@@ -22,7 +22,7 @@
 		55B781FE24A61D480036F8E5 /* WalletConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B781FA24A61D480036F8E5 /* WalletConnect.swift */; };
 		55B781FF24A61D480036F8E5 /* HandshakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B781FB24A61D480036F8E5 /* HandshakeViewController.swift */; };
 		55B7820024A61D480036F8E5 /* ActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B781FC24A61D480036F8E5 /* ActionsViewController.swift */; };
-		D4C672F22682121400D1A362 /* WalletConnectSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D4C672F12682121400D1A362 /* WalletConnectSwift */; };
+		D4C6730126821DDF00D1A362 /* WalletConnectSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D4C6730026821DDF00D1A362 /* WalletConnectSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4C672F22682121400D1A362 /* WalletConnectSwift in Frameworks */,
+				D4C6730126821DDF00D1A362 /* WalletConnectSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,7 +159,7 @@
 			);
 			name = ClientApp;
 			packageProductDependencies = (
-				D4C672F12682121400D1A362 /* WalletConnectSwift */,
+				D4C6730026821DDF00D1A362 /* WalletConnectSwift */,
 			);
 			productName = ClientApp;
 			productReference = 55B781E524A61CE60036F8E5 /* ClientApp.app */;
@@ -194,7 +194,7 @@
 			mainGroup = 55B7819F24A616A20036F8E5;
 			packageReferences = (
 				555DE0B124BC3516002714B9 /* XCRemoteSwiftPackageReference "Web3.swift" */,
-				D4C672F02682121400D1A362 /* XCRemoteSwiftPackageReference "FledgeWalletConnectSwift" */,
+				D4C672FF26821DDF00D1A362 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */,
 			);
 			productRefGroup = 55B781A924A616A20036F8E5 /* Products */;
 			projectDirPath = "";
@@ -525,12 +525,12 @@
 				minimumVersion = 0.4.2;
 			};
 		};
-		D4C672F02682121400D1A362 /* XCRemoteSwiftPackageReference "FledgeWalletConnectSwift" */ = {
+		D4C672FF26821DDF00D1A362 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/flatcircle/FledgeWalletConnectSwift";
+			repositoryURL = "https://github.com/iampawan/WalletConnectSwift";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -541,9 +541,9 @@
 			package = 555DE0B124BC3516002714B9 /* XCRemoteSwiftPackageReference "Web3.swift" */;
 			productName = Web3;
 		};
-		D4C672F12682121400D1A362 /* WalletConnectSwift */ = {
+		D4C6730026821DDF00D1A362 /* WalletConnectSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D4C672F02682121400D1A362 /* XCRemoteSwiftPackageReference "FledgeWalletConnectSwift" */;
+			package = D4C672FF26821DDF00D1A362 /* XCRemoteSwiftPackageReference "WalletConnectSwift" */;
 			productName = WalletConnectSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
