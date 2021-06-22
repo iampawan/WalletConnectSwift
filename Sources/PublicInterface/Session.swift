@@ -32,7 +32,7 @@ public struct Session: Codable {
 
         func with(approved: Bool) -> DAppInfo {
             return DAppInfo(peerId: self.peerId,
-                            peerMeta: self.peerMeta,
+                            peerMeta: self.peerMeta!,
                             chainId: self.chainId,
                             approved: approved)
         }
@@ -66,7 +66,7 @@ public struct Session: Codable {
             self.accounts = accounts
             self.chainId = chainId
             self.peerId = peerId
-            self.peerMeta = peerMeta
+          self.peerMeta = peerMeta!
         }
 
         func with(approved: Bool) -> WalletInfo {
